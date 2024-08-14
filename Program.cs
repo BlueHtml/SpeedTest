@@ -11,6 +11,7 @@ namespace SpeedTest
         {
             _conf = JsonConvert.DeserializeObject<Conf>(GetEnvValue("CONF"));
             using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.95 Safari/537.36");
 
             string confJs = await client.GetStringAsync("https://www.chinafy.com/js/poca/component/SpeedTestHelper.js");
             confJs = Regex.Match(confJs, @"locationsCfgMap:([\s\S]+?),[\s]*locationAreasMap").Groups[1].Value;
